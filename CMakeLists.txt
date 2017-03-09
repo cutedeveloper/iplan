@@ -1,3 +1,4 @@
 cmake_minimum_required(VERSION 2.8)
 project(actic)
-add_executable(${PROJECT_NAME} main.cpp)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+add_executable(${PROJECT_NAME} src/main.cpp src/Goal.cpp src/GoalManager.cpp)
