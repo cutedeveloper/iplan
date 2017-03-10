@@ -12,6 +12,24 @@ class Goal
 public:
 	typedef std::unique_ptr<Goal> GoalUniquePointer;
 	typedef std::vector<GoalUniquePointer> SubGoals;
+
+	Goal(std::string desc, AcTick total, AcTick done)
+	: description(desc)
+	, total_actick(total)
+	, done_actick(done)
+	{
+
+	}
+	const std::string& get_description() const
+	{
+		return description;
+	}
+
+	void set_description(const std::string& desc)
+	{
+		description = desc;
+	}
+
 	void add_sub_goal(Goal* goal);
 	size_t sub_goals_count() const;
 private:
