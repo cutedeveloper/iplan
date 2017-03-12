@@ -1,4 +1,5 @@
 #ifndef GOAL_H_
+
 #define GOAL_H_
 
 #include <string>
@@ -7,13 +8,14 @@
 
 typedef size_t AcTick;
 
+class Goal;
+typedef std::unique_ptr<Goal> GoalUniquePointer;
+typedef std::vector<GoalUniquePointer> Goals;
+
 class Goal
 {
 public:
-	typedef std::unique_ptr<Goal> GoalUniquePointer;
-	typedef std::vector<GoalUniquePointer> SubGoals;
-
-	Goal(std::string desc, AcTick total, AcTick done)
+	Goal(const std::string& desc, AcTick total, AcTick done)
 	: description(desc)
 	, total_actick(total)
 	, done_actick(done)
@@ -36,7 +38,7 @@ private:
     std::string description;
     AcTick total_actick;
     AcTick done_actick;
-	SubGoals sub_goals;
+	Goals sub_goals;
 };
 
 #endif
