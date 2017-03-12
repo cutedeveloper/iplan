@@ -3,12 +3,13 @@
 
 using namespace std;
 
-int GoalManager::create_goal(const std::string& desc, AcTick total, AcTick done, Goal* parent)
+GoalIdentifier GoalManager::create_goal(const std::string& desc, AcTick total, AcTick done, Goal* parent)
 {
-	Goal* goal = GoalFactory::create_goal(desc, total, done);
+	GoalIdentifier id = make_tuple(head_goals.size() + 1, HEAD_GOAL_SUB_ID);
+	Goal* goal = GoalFactory::create_goal(desc, total, done, id ,parent);
 
-	if (parent)
-		parent->add_sub_goal(goal);
-	else
+	if (!parent)
 		head_goals.push_back(unique_ptr<Goal>(goal));
+
+	return id;
 }

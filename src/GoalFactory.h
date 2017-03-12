@@ -6,7 +6,7 @@
 class GoalFactory
 {
 public:
-	static Goal* create_goal(const std::string& description, AcTick total, AcTick done);
+	static Goal* create_goal(const std::string& description, AcTick total, AcTick done, GoalIdentifier id, Goal* parent);
 };
 
 #endif
