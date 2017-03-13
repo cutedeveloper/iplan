@@ -13,16 +13,47 @@ class Goal;
 typedef std::unique_ptr<Goal> GoalUniquePointer;
 typedef std::vector<GoalUniquePointer> Goals;
 
-/// ID of goals, for head goals the second element is HEAD_GOAL_SUB_ID
-constexpr int HEAD_GOAL_SUB_ID = -1;
-constexpr int GOAL_ID_MAIN_INDEX = 0;
-constexpr int GOAL_ID_SUB_INDEX = 1;
-typedef std::tuple<int, int> GoalIdentifier;
+class GoalIdentifier
+{
+public:
+	static constexpr int HEAD_GOAL_PARENT_ID = -1;
+	GoalIdentifier(int parent_id, int in_parent_id)
+	: parent_id(parent_id)
+	, in_parent_id(in_parent_id)
+	{
+	}
+
+	GoalIdentifier() = delete;
+
+	int get_parent_id() const
+	{
+		return parent_id;
+	}
+
+	void set_parent_id(const int pid)
+	{
+		parent_id = pid;
+	}
+
+	int get_in_parent_id() const
+	{
+		return in_parent_id;
+	}
+
+	void set_in_parent_id(const int in_pid)
+	{
+		in_parent_id = in_pid;
+	}
+
+private:
+	int parent_id;
+	int in_parent_id;
+};
 
 class Goal
 {
 public:
-	Goal(const std::string& desc, AcTick total, AcTick done, GoalIdentifier id)
+	Goal(const std::string& desc, AcTick total, AcTick done, const GoalIdentifier& id)
 	: description(desc)
 	, total_actick(total)
 	, done_actick(done)
