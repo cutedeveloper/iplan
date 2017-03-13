@@ -6,6 +6,7 @@
 #include <memory>
 #include <vector>
 #include <tuple>
+#include <assert.h>
 
 typedef size_t AcTick;
 
@@ -23,7 +24,11 @@ public:
 	{
 	}
 
-	GoalIdentifier() = delete;
+	GoalIdentifier()
+	: parent_id(HEAD_GOAL_PARENT_ID)
+	, in_parent_id(HEAD_GOAL_PARENT_ID)
+	{
+	}
 
 	int get_parent_id() const
 	{
@@ -42,6 +47,7 @@ public:
 
 	void set_in_parent_id(const int in_pid)
 	{
+		assert(in_pid != HEAD_GOAL_PARENT_ID);
 		in_parent_id = in_pid;
 	}
 
@@ -74,6 +80,26 @@ public:
 	const GoalIdentifier& get_identifier() const
 	{
 		return identifier;
+	}
+
+	int get_parent_id() const
+	{
+		return identifier.get_parent_id();
+	}
+
+	int get_in_parent_id() const
+	{
+		return identifier.get_in_parent_id();
+	}
+
+	void set_parent_id(const int parent_id)
+	{
+		identifier.set_parent_id(parent_id);
+	}
+
+	void set_in_parent_id(const int in_parent_id)
+	{
+		identifier.set_in_parent_id(in_parent_id);
 	}
 
 	void add_sub_goal(Goal* goal);
