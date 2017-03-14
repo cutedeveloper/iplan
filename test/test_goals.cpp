@@ -25,6 +25,24 @@ TEST(GoalManagerTest, TestGoalCreation)
 	EXPECT_EQ(e->get_in_parent_id(), 1);
 }
 
+TEST(GoalActickTest, TestTotalActick)
+{
+	GoalManager goal_manager;
+	Goal* a = goal_manager.create_goal("desc", 12, 10);
+	Goal* b = goal_manager.create_goal("Desc 2", 12, 10, a);
+	EXPECT_EQ(a->get_total_actick(), 24);
+	EXPECT_EQ(b->get_total_actick(), 12);
+}
+
+TEST(GoalActickTest, TestDonelActick)
+{
+	GoalManager goal_manager;
+	Goal* a = goal_manager.create_goal("desc", 12, 10);
+	Goal* b = goal_manager.create_goal("Desc 2", 12, 10, a);
+	EXPECT_EQ(a->get_done_actick(), 20);
+	EXPECT_EQ(b->get_done_actick(), 10);
+}
+
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
