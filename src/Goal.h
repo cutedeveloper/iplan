@@ -102,8 +102,6 @@ public:
 		identifier.set_in_parent_id(in_parent_id);
 	}
 
-	AcTick get_total_actic() const;
-
 	void add_sub_goal(Goal* goal);
 	size_t sub_goals_count() const;
 	AcTick get_total_actick() const;
@@ -111,6 +109,8 @@ public:
 
 	AcTick get_done_actick() const;
 	void set_done_actick(const AcTick& value);
+
+	double get_progress_percent() const;
 
 private:
 	std::string description;

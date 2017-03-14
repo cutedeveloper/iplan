@@ -24,6 +24,7 @@ size_t Goal::sub_goals_count() const
 
 void Goal::set_total_actick(const AcTick total)
 {
+	assert(total >= done_actick);
 	total_actick = total;
 }
 
@@ -38,5 +39,14 @@ AcTick Goal::get_done_actick() const
 
 void Goal::set_done_actick(const AcTick& value)
 {
+	assert(value <= total_actick);
 	done_actick = value;
+}
+
+double Goal::get_progress_percent() const
+{
+	double percent = (static_cast<double>(get_done_actick()) / get_total_actick()) * 100;
+	assert(percent <= 100);
+	assert(percent >= 0);
+	return percent;
 }

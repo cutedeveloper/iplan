@@ -11,7 +11,7 @@ public:
 
 	}
 
-	Goal* create_goal(const std::string& desc, AcTick total, AcTick done, Goal* parent = nullptr);
+	Goal* create_goal(const std::string& desc, AcTick total = 0, AcTick done = 0, Goal* parent = nullptr);
 
 private:
 	Goals head_goals;

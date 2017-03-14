@@ -43,6 +43,34 @@ TEST(GoalActickTest, TestDonelActick)
 	EXPECT_EQ(b->get_done_actick(), 10);
 }
 
+TEST(GoalActickTest, TestProgressPercent)
+{
+	GoalManager goal_manager;
+	Goal* a = goal_manager.create_goal("desc");
+	Goal* b = goal_manager.create_goal("Desc 2", 10, 5, a);
+	Goal* c = goal_manager.create_goal("Desc 2", 30, 5, a);
+	EXPECT_EQ(a->get_progress_percent(), 25);
+	EXPECT_EQ(b->get_progress_percent(), 50);
+	EXPECT_NEAR(c->get_progress_percent(), 16.6, 0.07);
+	c->set_done_actick(15);
+	EXPECT_EQ(a->get_progress_percent(), 50);
+	EXPECT_EQ(b->get_progress_percent(), 50);
+	EXPECT_EQ(c->get_progress_percent(), 50);
+	c->set_done_actick(30);
+	b->set_done_actick(10);
+	EXPECT_EQ(a->get_progress_percent(), 100);
+	EXPECT_EQ(b->get_progress_percent(), 100);
+	EXPECT_EQ(c->get_progress_percent(), 100);
+	a->set_total_actick(60);
+	EXPECT_EQ(a->get_progress_percent(), 40);
+	EXPECT_EQ(b->get_progress_percent(), 100);
+	EXPECT_EQ(c->get_progress_percent(), 100);
+	Goal* d = goal_manager.create_goal("Desc 2", 100, 0, b);
+	EXPECT_EQ(a->get_progress_percent(), 20);
+	EXPECT_NEAR(b->get_progress_percent(), 9, 0.1);
+	EXPECT_EQ(c->get_progress_percent(), 100);
+}
+
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
