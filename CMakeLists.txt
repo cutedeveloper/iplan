@@ -5,14 +5,22 @@ add_library(${PROJECT_NAME}_lib STATIC src/Goal.cpp src/GoalManager.cpp src/Goal
 add_executable(${PROJECT_NAME} src/main.cpp)
 target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}_lib)
 
-
 #gtest
 set(PROJECT_TEST_NAME ${PROJECT_NAME}_test)
 enable_testing()
-INCLUDE_DIRECTORIES(googletest src)
-LINK_DIRECTORIES(D:/projects/iplan/googletest)
 
+if(WIN32)
+	INCLUDE_DIRECTORIES(googletest src)
+	LINK_DIRECTORIES(D:/projects/iplan/googletest)
+endif(WIN32)
+
+if(UNIX)
+	find_package(GTest REQUIRED)
+	include_directories(${GTEST_INCLUDE_DIRS})
+endif(UNIX)
+
+include_directories(src)
 file(GLOB TEST_SRC_FILES test/*.cpp)
 add_executable(${PROJECT_TEST_NAME} ${TEST_SRC_FILES})
-target_link_libraries(${PROJECT_TEST_NAME} gtest)
+target_link_libraries(${PROJECT_TEST_NAME} gtest pthread)
 target_link_libraries(${PROJECT_TEST_NAME} ${PROJECT_NAME}_lib)
