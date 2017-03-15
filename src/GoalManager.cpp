@@ -5,9 +5,9 @@
 
 using namespace std;
 
-Goal* GoalManager::create_goal(const std::string& desc, AcTick total, AcTick done, Goal* parent)
+Goal* GoalManager::create_goal(const std::string& desc, AcTick total, AcTick done, Goal* parent, const std::string& unit)
 {
-	Goal* goal = GoalFactory::create_goal(desc, total, done, parent, head_goals.size() + 1);
+	Goal* goal = GoalFactory::create_goal(desc, total, done, parent, head_goals.size() + 1, unit);
 	if (!parent)
 		head_goals.push_back(unique_ptr<Goal>(goal));
 

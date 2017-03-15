@@ -44,8 +44,8 @@ private:
 		for (auto&& goal : goals)
 		{
 			print_depth(depth);
-			printf("%s (%d/%d) %f\%\n", goal->get_description().c_str(), goal->get_done_actick(),
-				   goal->get_total_actick(), goal->get_progress_percent());
+			printf("%s (%d %s of %d %s) %f\%\n", goal->get_description().c_str(), goal->get_done_actick(),
+				   goal->get_step_unit().c_str(), goal->get_total_actick(), goal->get_step_unit().c_str(), goal->get_progress_percent());
 			print_goal(goal->get_sub_goals(), depth + 1);
 		}
 	}
@@ -65,7 +65,8 @@ public:
 	{
 	}
 
-	Goal* create_goal(const std::string& desc, AcTick total = 0, AcTick done = 0, Goal* parent = nullptr);
+	Goal* create_goal(const std::string& desc, AcTick total = 0, AcTick done = 0, Goal* parent = nullptr,
+					  const std::string& unit = std::string());
 	void print_goals();
 
 private:

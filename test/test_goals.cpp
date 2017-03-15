@@ -25,6 +25,19 @@ TEST(GoalManagerTest, TestGoalCreation)
 	EXPECT_EQ(e->get_in_parent_id(), 1);
 }
 
+TEST(GoalManagerTest, TestGoalStep)
+{
+	GoalManager goal_manager;
+	Goal* a = goal_manager.create_goal("desc", 12, 10, nullptr, "word");
+	EXPECT_EQ(a->get_step_unit(), "word");
+
+	Goal* b = goal_manager.create_goal("Desc 2", 12, 10, a);
+	EXPECT_EQ(b->get_step_unit(), "word");
+
+	Goal* c = goal_manager.create_goal("Desc 2", 12, 10, b);
+	EXPECT_EQ(c->get_step_unit(), "word");
+}
+
 TEST(GoalActickTest, TestTotalActick)
 {
 	GoalManager goal_manager;

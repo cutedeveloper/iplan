@@ -59,14 +59,17 @@ private:
 class Goal
 {
 public:
-	Goal(const std::string& desc, AcTick total, AcTick done, const GoalIdentifier& id)
+	Goal(const std::string& desc, AcTick total, AcTick done, const GoalIdentifier& id, const std::string& unit,
+		 Goal* parent = nullptr)
 	: description(desc)
 	, total_actick(total)
 	, done_actick(done)
 	, identifier(id)
+	, step_unit(unit)
+	, parent(parent)
 	{
-
 	}
+
 	const std::string& get_description() const
 	{
 		return description;
@@ -117,12 +120,21 @@ public:
 		return sub_goals;
 	}
 
+	const std::string get_step_unit() const
+	{
+		if (parent)
+			return parent->get_step_unit();
+		return step_unit;
+	}
+
 private:
 	std::string description;
+	std::string step_unit;
 	AcTick total_actick;
 	AcTick done_actick;
 	GoalIdentifier identifier;
 	Goals sub_goals;
+	Goal* parent;
 };
 
 #endif
