@@ -1,6 +1,8 @@
 #include "GoalManager.h"
 #include "GoalFactory.h"
 
+#include <iostream>
+
 using namespace std;
 
 Goal* GoalManager::create_goal(const std::string& desc, AcTick total, AcTick done, Goal* parent)
@@ -11,3 +13,11 @@ Goal* GoalManager::create_goal(const std::string& desc, AcTick total, AcTick don
 
 	return goal;
 }
+
+void GoalManager::print_goals()
+{
+	if (printer)
+	printer->print_goal(head_goals);
+}
+
+

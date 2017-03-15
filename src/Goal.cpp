@@ -1,5 +1,7 @@
 #include "Goal.h"
 
+#include <iostream>
+
 using namespace std;
 
 AcTick Goal::get_total_actick() const

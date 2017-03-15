@@ -112,6 +112,11 @@ public:
 
 	double get_progress_percent() const;
 
+	const Goals& get_sub_goals() const
+	{
+		return sub_goals;
+	}
+
 private:
 	std::string description;
 	AcTick total_actick;
