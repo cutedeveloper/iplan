@@ -44,7 +44,7 @@ private:
 		for (auto&& goal : goals)
 		{
 			print_depth(depth);
-			printf("%s (%d %s of %d %s) %f\%\n", goal->get_description().c_str(), goal->get_done_actick(),
+			printf("%s (%lu %s of %lu %s) %f%%\n", goal->get_description().c_str(), goal->get_done_actick(),
 				   goal->get_step_unit().c_str(), goal->get_total_actick(), goal->get_step_unit().c_str(), goal->get_progress_percent());
 			print_goal(goal->get_sub_goals(), depth + 1);
 		}

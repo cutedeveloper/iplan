@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 project(actic)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Werror")
 add_library(${PROJECT_NAME}_lib STATIC src/Goal.cpp src/GoalManager.cpp src/GoalFactory.cpp)
 add_executable(${PROJECT_NAME} src/main.cpp)
 target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}_lib)
